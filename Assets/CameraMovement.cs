@@ -18,6 +18,6 @@ public class CameraMovement : MonoBehaviour
         currentRotation.y -= Input.GetAxis("Mouse Y") * 1000 * Time.deltaTime;
         currentRotation.x = Mathf.Repeat(currentRotation.x, 360);
         currentRotation.y = Mathf.Clamp(currentRotation.y, -90, 90);
-         Camera.main.transform.rotation = Quaternion.Euler(this.transform.rotation.x,currentRotation.x,0);
+        Camera.main.transform.rotation = Quaternion.Euler(currentRotation.y,currentRotation.x,0);
     }
 }
