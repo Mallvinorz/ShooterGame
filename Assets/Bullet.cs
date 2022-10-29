@@ -30,7 +30,7 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision other) {
         string tag = other.gameObject.tag;
-        if(tag == "Obstacles" || tag == "Enemies"){
+        if(tag == "Obstacles" || tag == "Enemies" || tag == "Core"){
             
             if(isBomb){
                 triggerBombExplode = true;
@@ -41,8 +41,8 @@ public class Bullet : MonoBehaviour
     }
 
     private void OnTriggerStay(Collider other) {
-        if(other.gameObject.tag == "Enemies" && triggerBombExplode){
-            Debug.Log("Boom!");
+        if((other.gameObject.tag == "Enemies" || other.gameObject.tag == "Core") && triggerBombExplode){
+            // Debug.Log("Boom!");
             Destroy(this.gameObject);
         }
     }

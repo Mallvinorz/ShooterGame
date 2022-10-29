@@ -10,6 +10,12 @@ public class Projectile : MonoBehaviour
     public float projectileVelocity;
     public GameObject shootPoint;
 
+    public GameObject[] ultimateShootPoints;
+    public float ultimateDuration;
+    private float currentUltimateDuration = 0f;
+
+    private bool isUsingUltimate = false;
+
     public float maximumBulletDistance;
     private int SPEED_KONSTAN = 10;
     private float[] fireRates = {1.2f, 0.2f};
@@ -17,9 +23,10 @@ public class Projectile : MonoBehaviour
     private bool canShooting = true;
     private Vector2 currentShootPointPos;
 
-
     public RawImage[] weaponTypes;
     private int currentActiveWeaponIdx = 0;
+
+    public GameObject[] shootAudios;
     // Update is called once per frame
     private void CheckWeaponType() {
         for (int i = 0; i < weaponTypes.Length; i++)
@@ -39,6 +46,7 @@ public class Projectile : MonoBehaviour
         CheckCanShoot();
         if(Input.GetButton("Fire1") && canShooting){
             LaunchProjectile();
+            PlayShootSFX(currentActiveWeaponIdx);   
             SetShootTimer(0);
         }
     }
@@ -55,6 +63,15 @@ public class Projectile : MonoBehaviour
         bullet.GetComponent<Rigidbody>().AddRelativeForce(new Vector3 (0, -(projectileVelocity * SPEED_KONSTAN),0));
     }
 
+    void UltimateShooting(){
+        currentUltimateDuration += Time.deltaTime;
+        if(currentUltimateDuration >= ultimateDuration) isUsingUltimate = false;
+        
+        for (int i = 0; i < ultimateShootPoints.Length; i++){
+            GameObject bullet = Instantiate(projectiles[0], ultimateShootPoints[i].transform.position, ultimateShootPoints[i].transform.rotation);
+            bullet.GetComponent<Rigidbody>().AddRelativeForce(new Vector3 (0, -(projectileVelocity * SPEED_KONSTAN),0));
+        }
+    }
     void CheckCanShoot(){
         fireTimer += Time.deltaTime;
         if(fireTimer >= fireRates[currentActiveWeaponIdx]){
@@ -66,5 +83,15 @@ public class Projectile : MonoBehaviour
 
     void SetShootTimer(float arg){
         fireTimer = arg;
+    }
+
+    void PlayShootSFX(int arg){
+        if(!shootAudios[arg].GetComponent<AudioSource>().isPlaying){
+            shootAudios[arg].GetComponent<AudioSource>().Play();
+        }
+        // else{
+        //     shootingAudio.GetComponent<AudioSource>().Stop();
+        // }
+        // shootingAudio.GetComponent<AudioSource>().Stop();
     }
 }

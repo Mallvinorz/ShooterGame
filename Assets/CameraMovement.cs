@@ -15,8 +15,8 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentRotation.x += Input.GetAxis("Mouse X") * 1000 * Time.deltaTime;
-        currentRotation.y -= Input.GetAxis("Mouse Y") * 1000 * Time.deltaTime;
+        currentRotation.x += Input.GetAxis("Mouse X") * 2000 * Time.deltaTime;
+        currentRotation.y -= Input.GetAxis("Mouse Y") * 2000 * Time.deltaTime;
         currentRotation.x = Mathf.Repeat(currentRotation.x, 360);
         currentRotation.y = Mathf.Clamp(currentRotation.y, -90, 45);
         // Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, -3.22f + currentRotation.x * 0.01f) ;

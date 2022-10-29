@@ -9,6 +9,7 @@ TagManager:
   - Ground
   - Bullet
   - Bomb
+  - Core
   layers:
   - Default
   - TransparentFX
