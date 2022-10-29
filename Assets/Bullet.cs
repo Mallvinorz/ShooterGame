@@ -8,9 +8,14 @@ public class Bullet : MonoBehaviour
     public float maximumBulletDistance;
     public Projectile projectile;
     private Vector3 startPos;
+
+    private bool isBomb = false;
+    private bool triggerBombExplode = false;
     // Update is called once per frame
     void Start(){
         startPos = new Vector3(this.transform.position.x, 0, this.transform.position.z);
+        triggerBombExplode = false;
+        if(this.gameObject.tag == "Bomb") isBomb = true;
     }
     void Update()
     {
@@ -18,7 +23,7 @@ public class Bullet : MonoBehaviour
         float zMagnitude = Mathf.Abs(this.transform.position.z) - Mathf.Abs(startPos.z);
         
         float distance = Mathf.Sqrt((xMagnitude*xMagnitude) + (zMagnitude*zMagnitude));
-        Debug.Log(distance);
+        // Debug.Log(distance);
 
         if(distance >= maximumBulletDistance) Destroy(this.gameObject);
     }
@@ -26,7 +31,20 @@ public class Bullet : MonoBehaviour
     private void OnCollisionEnter(Collision other) {
         string tag = other.gameObject.tag;
         if(tag == "Obstacles" || tag == "Enemies"){
+            
+            if(isBomb){
+                triggerBombExplode = true;
+            }else{
+                Destroy(this.gameObject);
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other) {
+        if(other.gameObject.tag == "Enemies" && triggerBombExplode){
+            Debug.Log("Boom!");
             Destroy(this.gameObject);
         }
     }
+    
 }

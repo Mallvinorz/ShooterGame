@@ -1,23 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Projectile : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject projectile;
+    public GameObject[] projectiles;
     public float projectileVelocity;
     public GameObject shootPoint;
 
     public float maximumBulletDistance;
     private int SPEED_KONSTAN = 10;
-    private float fireRate = 0.2f;
+    private float[] fireRates = {1.2f, 0.2f};
     private float fireTimer = 0;
     private bool canShooting = true;
     private Vector2 currentShootPointPos;
+
+
+    public RawImage[] weaponTypes;
+    private int currentActiveWeaponIdx = 0;
     // Update is called once per frame
+    private void CheckWeaponType() {
+        for (int i = 0; i < weaponTypes.Length; i++)
+        {
+            if(i == currentActiveWeaponIdx){
+                weaponTypes[i].color = new Color32(255,255,225,255);
+            }else{
+                weaponTypes[i].color = new Color32(255,255,225,100);
+            }
+
+        }
+    }
     void Update()
     {
+        CheckWeaponType();
         currentShootPointPos = new Vector2(this.transform.position.x, this.transform.position.z);
         CheckCanShoot();
         if(Input.GetButton("Fire1") && canShooting){
@@ -26,17 +43,21 @@ public class Projectile : MonoBehaviour
         }
     }
 
+    public void SetWeaponTypeIndex(int arg){
+        currentActiveWeaponIdx = arg;
+    }
+
     public Vector2 GetShootPointPos(){
         return currentShootPointPos;
     }
     void LaunchProjectile(){
-        GameObject bullet = Instantiate(projectile, shootPoint.transform.position, shootPoint.transform.rotation);
+        GameObject bullet = Instantiate(projectiles[currentActiveWeaponIdx], shootPoint.transform.position, shootPoint.transform.rotation);
         bullet.GetComponent<Rigidbody>().AddRelativeForce(new Vector3 (0, -(projectileVelocity * SPEED_KONSTAN),0));
     }
 
     void CheckCanShoot(){
         fireTimer += Time.deltaTime;
-        if(fireTimer >= fireRate){
+        if(fireTimer >= fireRates[currentActiveWeaponIdx]){
             canShooting = true;
         }else{
             canShooting = false;
