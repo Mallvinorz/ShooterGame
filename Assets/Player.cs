@@ -9,6 +9,8 @@ public int movementSpeed;
     // Update is called once per frame
     public GameObject gun;
     private Vector2 currentRotation;
+
+    public Projectile projectile;
     void Update()
     {
         MovingRelativeToCamera();
@@ -16,10 +18,17 @@ public int movementSpeed;
         
         float speed = 0.1f;
         Quaternion currentRot = transform.rotation;
-        transform.rotation = Quaternion.Slerp(currentRot, Camera.main.transform.rotation, speed);
-        // Vector3 movementDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        // movementDirection.Normalize();
-        // this.transform.Translate(movementDirection * movementSpeed * Time.deltaTime, Space.World);
+
+        Quaternion cameraRotation = Camera.main.transform.rotation;
+        Quaternion targetCameraRotation = new Quaternion(0, cameraRotation.y, cameraRotation.z, cameraRotation.z);
+        // transform.rotation = Quaternion.Slerp(currentRot, Camera.main.transform.rotation, speed);
+         transform.rotation *= 
+                 Quaternion.AngleAxis(Input.GetAxis("Mouse X") * 1000 * Time.deltaTime, Vector3.up);
+    }
+
+    private void LateUpdate() {
+        if(Input.GetKeyDown(KeyCode.E)) projectile.SetWeaponTypeIndex(0);
+        if(Input.GetKeyDown(KeyCode.Q)) projectile.SetWeaponTypeIndex(1);
     }
 
     void MovingRelativeToCamera(){
