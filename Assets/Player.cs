@@ -23,7 +23,7 @@ public int movementSpeed;
         Quaternion targetCameraRotation = new Quaternion(0, cameraRotation.y, cameraRotation.z, cameraRotation.z);
         // transform.rotation = Quaternion.Slerp(currentRot, Camera.main.transform.rotation, speed);
          transform.rotation *= 
-                 Quaternion.AngleAxis(Input.GetAxis("Mouse X") * 1000 * Time.deltaTime, Vector3.up);
+                 Quaternion.AngleAxis(Input.GetAxis("Mouse X") * 2000 * Time.deltaTime, Vector3.up);
     }
 
     private void LateUpdate() {
@@ -47,8 +47,8 @@ public int movementSpeed;
     }
 
     void RotateGun(){
-        currentRotation.x += Input.GetAxis("Mouse X") * 1000 * Time.deltaTime;
-        currentRotation.y -= Input.GetAxis("Mouse Y") * 1000 * Time.deltaTime;
+        currentRotation.x += Input.GetAxis("Mouse X") * 2000 * Time.deltaTime;
+        currentRotation.y -= Input.GetAxis("Mouse Y") * 2000 * Time.deltaTime;
         currentRotation.x = Mathf.Repeat(currentRotation.x, 360);
         currentRotation.y = Mathf.Clamp(currentRotation.y, -90, 90);
         // currentRotation.y - 105.945f
