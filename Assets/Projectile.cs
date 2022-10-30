@@ -28,6 +28,10 @@ public class Projectile : MonoBehaviour
 
     public GameObject[] shootAudios;
     // Update is called once per frame
+
+    public GameObject explosionAnim;
+    // Gun explosion animation
+
     private void CheckWeaponType() {
         for (int i = 0; i < weaponTypes.Length; i++)
         {
@@ -46,7 +50,8 @@ public class Projectile : MonoBehaviour
         CheckCanShoot();
         if(Input.GetButton("Fire1") && canShooting){
             LaunchProjectile();
-            PlayShootSFX(currentActiveWeaponIdx);   
+            PlayShootSFX(currentActiveWeaponIdx);
+            explosionAnim.GetComponent<Animator>().SetTrigger("ExplosionStates");   
             SetShootTimer(0);
         }
     }
@@ -94,4 +99,6 @@ public class Projectile : MonoBehaviour
         // }
         // shootingAudio.GetComponent<AudioSource>().Stop();
     }
+
+
 }
