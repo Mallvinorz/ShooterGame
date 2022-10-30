@@ -130,6 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maximumBulletDistance: 20
   projectile: {fileID: 0}
+  explosionVfx: {fileID: 4026961443993788767, guid: a2bdb35aa58b9814aa7ca25418c77cff, type: 3}
 --- !u!114 &3029378816114896387
 MonoBehaviour:
   m_ObjectHideFlags: 0

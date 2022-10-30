@@ -50,7 +50,7 @@ public int movementSpeed;
         currentRotation.x += Input.GetAxis("Mouse X") * 2000 * Time.deltaTime;
         currentRotation.y -= Input.GetAxis("Mouse Y") * 2000 * Time.deltaTime;
         currentRotation.x = Mathf.Repeat(currentRotation.x, 360);
-        currentRotation.y = Mathf.Clamp(currentRotation.y, -90, 90);
+        currentRotation.y = Mathf.Clamp(currentRotation.y, -90, 45);
         // currentRotation.y - 105.945f
         gun.transform.rotation = Quaternion.Euler( currentRotation.y - 105.945f, currentRotation.x, this.transform.rotation.z);
     }

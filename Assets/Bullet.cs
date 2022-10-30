@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     public float maximumBulletDistance;
     public Projectile projectile;
+    public GameObject explosionVfx;
     private Vector3 startPos;
 
     private bool isBomb = false;
@@ -43,6 +44,7 @@ public class Bullet : MonoBehaviour
     private void OnTriggerStay(Collider other) {
         if((other.gameObject.tag == "Enemies" || other.gameObject.tag == "Core") && triggerBombExplode){
             // Debug.Log("Boom!");
+            Instantiate(explosionVfx, transform.position, transform.rotation);//add explosion vfx
             Destroy(this.gameObject);
         }
     }
