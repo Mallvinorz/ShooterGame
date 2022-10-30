@@ -10,6 +10,7 @@ TagManager:
   - Bullet
   - Bomb
   - Core
+  - Enemy Bullet
   layers:
   - Default
   - TransparentFX

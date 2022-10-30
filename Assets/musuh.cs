@@ -13,21 +13,17 @@ public class musuh : MonoBehaviour
     public float timeBetweenAttacks;
     bool alreadyAttacked;
     public GameObject projectile;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-     
-    }
-
+    public float enemyMoveSpeed;
+    public GameObject shootPoint;
     // Update is called once per frame
     void Update()
     {
-        this.transform.position = Vector3.MoveTowards(transform.position, target.transform.position, Time.deltaTime * 5);
+        this.transform.position = Vector3.MoveTowards(transform.position, target.transform.position, Time.deltaTime * enemyMoveSpeed * 1f);
         AttackPlayer();    
     }
      private void OnCollisionEnter(Collision other) {
-        if(other.gameObject.tag == "Player" || other.gameObject.tag == "Bullet" || other.gameObject.tag == "Bomb");
+        if(other.gameObject.tag == "Player" || other.gameObject.tag == "Bullet" || other.gameObject.tag == "Bomb") 
+            Destroy(this.gameObject);
     }
     void AttackPlayer()
     {
@@ -39,8 +35,8 @@ public class musuh : MonoBehaviour
         if (!alreadyAttacked)
         {
             ///Attack code here
-            Rigidbody rb = Instantiate(projectile,transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
+            Rigidbody rb = Instantiate(projectile, shootPoint.transform.position, shootPoint.transform.rotation).GetComponent<Rigidbody>();
+            rb.AddForce(transform.forward * 10f, ForceMode.Impulse);
             rb.AddForce(transform.up * 8f, ForceMode.Impulse);
             ///End of attack code
 
@@ -52,6 +48,5 @@ public class musuh : MonoBehaviour
     {
         alreadyAttacked = false;
     }
-
 
 }
