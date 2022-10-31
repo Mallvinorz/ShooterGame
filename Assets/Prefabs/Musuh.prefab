@@ -392,8 +392,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 3987284470569472379}
-  player: {fileID: 3341611103418226517, guid: 5ed8aded6d985cd498850ccfafc0a530, type: 3}
-  target: {fileID: 3341611103418226515, guid: 5ed8aded6d985cd498850ccfafc0a530, type: 3}
+  player: {fileID: 7292639743020869298, guid: 915715a0a6e682342b8ac5e4ce21f0a7, type: 3}
+  target: {fileID: 7292639743020869297, guid: 915715a0a6e682342b8ac5e4ce21f0a7, type: 3}
   timeBetweenAttacks: 2
   projectile: {fileID: 1033747383865582972, guid: 998b88e8b71f3034e8a69f9518d64cc5, type: 3}
   enemyMoveSpeed: 10

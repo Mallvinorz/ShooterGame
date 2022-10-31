@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour
     void Start(){
         startPos = new Vector3(this.transform.position.x, 0, this.transform.position.z);
         triggerBombExplode = false;
-        if(this.gameObject.tag == "Bomb") isBomb = true;
+        if(this.gameObject.tag == "Bomb" || this.gameObject.tag == "Enemy Bullet") isBomb = true;
     }
     void Update()
     {
@@ -42,7 +42,7 @@ public class Bullet : MonoBehaviour
     }
 
     private void OnTriggerStay(Collider other) {
-        if((other.gameObject.tag == "Enemies" || other.gameObject.tag == "Core") && triggerBombExplode){
+        if((other.gameObject.tag == "Enemies" || other.gameObject.tag == "Core" || other.gameObject.tag == "Obstacle") && triggerBombExplode){
             // Debug.Log("Boom!");
             Instantiate(explosionVfx, transform.position, transform.rotation);//add explosion vfx
             Destroy(this.gameObject);
