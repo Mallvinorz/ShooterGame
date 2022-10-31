@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3107888717618661461}
   - component: {fileID: 1379793811157783896}
   - component: {fileID: 3831271367291723730}
+  - component: {fileID: 7365544622720580509}
   m_Layer: 0
   m_Name: Enemy projectile
   m_TagString: Enemy Bullet
@@ -128,7 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maximumBulletDistance: 20
   projectile: {fileID: 0}
-  explosionVfx: {fileID: 0}
+  explosionVfx: {fileID: 4026961443993788767, guid: a2bdb35aa58b9814aa7ca25418c77cff, type: 3}
 --- !u!96 &3831271367291723730
 TrailRenderer:
   serializedVersion: 2
@@ -236,3 +237,16 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!135 &7365544622720580509
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1033747383865582972}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.5
+  m_Center: {x: 0, y: 0, z: 0}

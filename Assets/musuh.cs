@@ -22,13 +22,13 @@ public class musuh : MonoBehaviour
         AttackPlayer();    
     }
      private void OnCollisionEnter(Collision other) {
-        if(other.gameObject.tag == "Player" || other.gameObject.tag == "Bullet" || other.gameObject.tag == "Bomb") 
+        if(other.gameObject.tag == "Player" || other.gameObject.tag == "Bullet" || other.gameObject.tag == "Bomb" || other.gameObject.tag == "Core") 
             Destroy(this.gameObject);
     }
     void AttackPlayer()
     {
         //Make sure enemy doesn't move
-        agent.SetDestination(transform.position);
+        // agent.SetDestination(transform.position);
 
         transform.LookAt(player);
 
